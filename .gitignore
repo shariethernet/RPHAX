@@ -1,0 +1,9 @@
+out/
+myproj/
+ip/
+*.v
+*.backup
+vivado.txt
+*.jou
+.vscode/
+*.log
