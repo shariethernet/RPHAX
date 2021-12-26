@@ -8,3 +8,5 @@ vivado.txt
 .vscode/
 *.log
 NA/
+project_1_def_val.txt
+project_1_dump.txt
