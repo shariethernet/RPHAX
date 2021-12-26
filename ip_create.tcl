@@ -3,7 +3,7 @@ set content [read $fp]
 close $fp
 set lines [split $content \n]
 set pwdd [lindex $lines 0]
-set output_dir $pwdd\\ip
+set output_dir "$pwdd/ip"
 puts $output_dir
 puts $pwdd
 create_project inv_p2 $output_dir/inv_ip2 -part xc7z020clg400-1
