@@ -11,7 +11,7 @@ set content [read $fp]
 close $fp
 set lines [split $content \n]
 set pwdd [lindex $lines 0]
-set output_dir $pwdd\\ip
+set output_dir "$pwdd/ip"
 puts $output_dir
 puts $pwdd
 
