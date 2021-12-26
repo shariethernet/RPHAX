@@ -3,13 +3,9 @@ set content [read $fp]
 close $fp
 set lines [split $content \n]
 set pwdd [lindex $lines 0]
-<<<<<<< HEAD
 set output_dir $pwdd\\ip
 puts $output_dir
 puts $pwdd
-=======
-set output_dir $pwdd/ip
->>>>>>> b476dd49f0b36c13df89b8cb80bdd56628a9817a
 create_project inv_p2 $output_dir/inv_ip2 -part xc7z020clg400-1
 #set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
 
@@ -62,11 +58,6 @@ set_property core_revision 2 [ipx::current_core]
 ipx::create_xgui_files [ipx::current_core]
 ipx::update_checksums [ipx::current_core]
 ipx::save_core [ipx::current_core]
-<<<<<<< HEAD
 #set_property  ip_repo_paths  {} [current_project]
 #set_property  ip_repo_paths  "D:\RISC-V\Pynq\Projects\AutomateIP_TCL\ip3/ip/inv_ip2/inv_ip2.srcs/sources_1/new" [current_project]
 update_ip_catalog
-=======
-set_property  ip_repo_paths  $output_dir/inv_ip2/inv_ip2.srcs/sources_1/new [current_project]
-update_ip_catalog
->>>>>>> b476dd49f0b36c13df89b8cb80bdd56628a9817a
