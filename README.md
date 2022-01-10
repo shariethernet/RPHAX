@@ -23,4 +23,5 @@ This will generate the folder `ip` where your design will be packaged as an AXI 
 
 ## Note
 - This project is Work In Progress
-- Complete and detailed documentation will be updated in the first release
+- For now, to use verilog/SV/bsv remove or replace `sandpiper` line in `run_tlv.py` with `bsc` or give `.v/.sv` files directly.  
+- 
