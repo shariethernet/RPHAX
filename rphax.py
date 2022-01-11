@@ -22,13 +22,14 @@ Rapid Prototyping of Hardware Accelerators on Xilinx FPGAs - v0.1
 
 
 def tlv(filename):
+    print("\n************Interpreting TL-V with Sandpiper****************\n")
     out_file=filename[0:len(filename)-4]
     print("Compiling "+filename+" with Sandpiper-Saas")
     sp = "sandpiper-saas -i "+filename+" -o "+out_file+".v --iArgs --default_includes --outdir=out"
     try:
         os.system(sp)
         print("Sandpiper has generated the verilog/systemverilog files")
-        print("*******************************************************")
+        print("\n*******************************************************\n")
     except:
         print("Error - Verilog file not generated")
         exit()
@@ -38,6 +39,7 @@ def test1(filename):
     print("Extension checker=",filename[len(filename)-4:len(filename)])
 
 def pwd_write(dirname):
+    print("\n****************Setting Paths**********************\n")
     f = open("tmp.txt", "w")
     try:
         f.write(dirname)
@@ -49,47 +51,45 @@ def pwd_write(dirname):
         f.close()
 
 def ipgen(dirname):
+    print("\n**************Starting IP Packaging******************\n")
     try:
-        os.system("vivado -mode batch -source "+dirname+"/ip_create.tcl")
+        os.system("vivado -mode batch -source "+dirname+"/src/ip_create.tcl")
         
     except:
         print("Error - IP Generation")
         exit()
     else:
-        print("*******************************************************")
-        print("****************Vivado IP Created**********************")
-        print("*******************************************************")
-        
+        print("\n****************Vivado IP Created**********************\n")
+                
 def bdgen(dirname):
+    print("\n****************Starting Block Design**********************\n")
     try:
-        os.system("vivado -mode batch -source "+dirname+"/bd_create.tcl")
+        os.system("vivado -mode batch -source "+dirname+"/src/bd_create.tcl")
     except:
         print("Error generating Block Design")
+        exit()
     else:
-        print("*******************************************************")
-        print("****************Vivado Block Design Created**********************")
-        print("*******************************************************")
-
+        print("\n****************Vivado Block Design Created**********************\n")
+        
 def bdgen_bitstream(dirname):
+    print("\n****************Starting Block Design and Bitstream**********************\n")
     try:
-        os.system("vivado -mode batch -source "+dirname+"/bd_bitstream_create.tcl")
+        os.system("vivado -mode batch -source "+dirname+"/src/bd_bitstream_create.tcl")
     except:
         print("Error generating block design and bitstream. Try generating upto block design and use gui for bitstream ")
+        exit()
     else:
-        print("*******************************************************")
-        print("****Vivado Block Design and Bitstream Created**********")
-        print("*******************************************************")
+        print("\n****Vivado Block Design and Bitstream Created**********\n")
 
 def projgen(dirname):
+    print("\n****************Creating Vivado Project from IP**********************\n")
     try:
-        os.system("vivado -mode batch -source"+dirname+"/project.tcl")
+        os.system("vivado -mode batch -source"+dirname+"/src/project.tcl")
     except:
         print("Error generating project")
         exit()
     else:
-        print("*******************************************************")
-        print("****************Block Design Generated*****************")
-        print("*******************************************************")
+        print("\n****************Block Design Generated*****************\n")
 
 
 
@@ -103,6 +103,7 @@ def clean():
 
 
 def check_extension(filename):
+    print("\n****************Validating file extensions**********************\n")
     print("Design file = ",filename)
     if(filename[len(filename)-4:len(filename)]==".tlv"):
         pass
