@@ -24,9 +24,9 @@ Rapid Prototyping of Hardware Accelerators on Xilinx FPGAs - v0.1
 def tlv(filename):
     out_file=filename[0:len(filename)-4]
     print("Compiling "+filename+" with Sandpiper-Saas")
-    temp = "sandpiper-saas -i "+filename+" -o "+out_file+".v --iArgs --default_includes --outdir=out"
+    sp = "sandpiper-saas -i "+filename+" -o "+out_file+".v --iArgs --default_includes --outdir=out"
     try:
-        os.system(temp)
+        os.system(sp)
         print("Sandpiper has generated the verilog/systemverilog files")
         print("*******************************************************")
     except:
@@ -37,52 +37,70 @@ def test1(filename):
     print("Filename is ",filename)
     print("Extension checker=",filename[len(filename)-4:len(filename)])
 
-def pwd(dirname):
+def pwd_write(dirname):
     f = open("tmp.txt", "w")
-    f.write(dirname)
-    f.close()
+    try:
+        f.write(dirname)
+    except:
+        print("Error - Writing path to temporary file")
+    else:
+        print("Path stored to read from TCL in temporary file")
+    finally:
+        f.close()
 
 def ipgen(dirname):
     try:
         os.system("vivado -mode batch -source "+dirname+"/ip_create.tcl")
-        print("*******************************************************")
-        print("****************Vivado IP Created**********************")
-        print("*******************************************************")
+        
     except:
         print("Error - IP Generation")
         exit()
+    else:
+        print("*******************************************************")
+        print("****************Vivado IP Created**********************")
+        print("*******************************************************")
         
 def bdgen(dirname):
     try:
         os.system("vivado -mode batch -source "+dirname+"/bd_create.tcl")
+    except:
+        print("Error generating Block Design")
+    else:
         print("*******************************************************")
         print("****************Vivado Block Design Created**********************")
         print("*******************************************************")
-    except:
-        print("Error generating Block Design")
 
 def bdgen_bitstream(dirname):
     try:
         os.system("vivado -mode batch -source "+dirname+"/bd_bitstream_create.tcl")
-        print("*******************************************************")
-        print("****************Vivado Block Design and Bitstream Created**********************")
-        print("*******************************************************")
     except:
         print("Error generating block design and bitstream. Try generating upto block design and use gui for bitstream ")
+    else:
+        print("*******************************************************")
+        print("****Vivado Block Design and Bitstream Created**********")
+        print("*******************************************************")
 
-def projgen():
+def projgen(dirname):
     try:
         os.system("vivado -mode batch -source"+dirname+"/project.tcl")
-        print("*******************************************************")
-        print("****************Block Design Generated*****************")
-        print("*******************************************************")
     except:
         print("Error generating project")
         exit()
+    else:
+        print("*******************************************************")
+        print("****************Block Design Generated*****************")
+        print("*******************************************************")
+
 
 
 def clean():
-    os.system("rm -f tmp.txt ")
+    if (sys.platform == "Windows"):
+        os.system("powershell.exe rm -f tmp.txt")
+    elif sys.platform in ["Linux","Darwin"] :
+        os.system("rm -rf tmp.txt")
+    else:
+        print("Error cleaning temporary files")
+
 
 def check_extension(filename):
     print("Design file = ",filename)
@@ -92,37 +110,33 @@ def check_extension(filename):
         print("Only .tlv files are supported")
         exit()
 
-def main(filename,dirname):#en_bitstream):
-    '''
-    parser = argparse.ArgumentParser(description='RPHAX')
-    parser.add_argument('--i', type=str)
-    parser.add_argument('--b', type=int)
-    args = parser.parse_args()
-'''
+def main():
 
     intro()
-    pwd(dirname)
-    # test1(filename)
-    check_extension(filename)
-    tlv(filename)
-    ipgen(dirname)
-    bdgen(dirname)
-    '''if(en_bitstream == "-b"):
-        bdgen_bitstream()
-    else:
-        bdgen()'''
+    parser = argparse.ArgumentParser(description = "RPHAX")
+    parser.add_argument("input_file", help = "Input .tlv file", type=str)
+    parser.add_argument('-b', action="store_true", help = "Generate upto Bitstream")
+    args = parser.parse_args()
 
-    #tlv()
+    filename = args.input_file
+    check_extension(filename)
+    dirname = os.getcwd()
+      
+    pwd_write(dirname)
+    
+    
+    tlv(filename)
+    
+    ipgen(dirname)
+    
+    if(args.b):
+        bdgen_bitstream(dirname)
+    else:
+        bdgen(dirname)
+
+    #clean() 
 
 if __name__ == '__main__':
-        dirname = os.getcwd()
-    #try:
-        filename = sys.argv[1]
-        '''try:
-            en_bitstream = sys.argv[2]
-        except:
-            pass '''
-        main(filename,dirname)
-    #except:
-        #print("Syntax Error: python run_tlv.py filename.tlv [Option to generate bitstream: -b] (By default till block design will be created) ")
+    main()
+        
     
