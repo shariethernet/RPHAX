@@ -34,6 +34,7 @@ This will generate the folder `ip` where your design will be packaged as an AXI 
 ## TO-DO
 
 - Add `TLV` templates for various interfaces (AXI4, AXI4 Lite, AXI Stream, RoCC etc.,)
+- Templates are found [here](./templates)
 - Provide `TLV` examples with the above interfaces and Pynq Overlays 
 - Re-structure RPHAX, as a python library to enable creation of custom interfaces
 
