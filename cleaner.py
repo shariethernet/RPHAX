@@ -4,7 +4,8 @@ import sys
 def main():
     try:
         if(sys.platform =="Windows"):
-            os.system('powershell.exe rm -rf ip myproj out NA *.jou *.log tmp.txt')
+            os.system("rmdir /f /s ip myproj out NA")
+            os.system("del /f *.jou")
         if(sys.platform in ["Linux","Darwin"]):
             os.system('rm -rf ip myproj out NA *.jou *.log tmp.txt')
     except:

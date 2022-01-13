@@ -34,6 +34,10 @@ def tlv(filename):
         print("Error - Verilog file not generated")
         exit()
 
+def bsc():
+    # TO DO
+    pass
+    
 def test1(filename):
     print("Filename is ",filename)
     print("Extension checker=",filename[len(filename)-4:len(filename)])
@@ -60,6 +64,9 @@ def ipgen(dirname):
         exit()
     else:
         print("\n****************Vivado IP Created**********************\n")
+    finally:
+        ip_set_params()
+        
                 
 def bdgen(dirname):
     print("\n****************Starting Block Design**********************\n")
@@ -90,6 +97,9 @@ def projgen(dirname):
         exit()
     else:
         print("\n****************Block Design Generated*****************\n")
+
+def ip_set_params():
+    pass
 
 
 
@@ -129,6 +139,8 @@ def main():
     tlv(filename)
     
     ipgen(dirname)
+
+    
     
     if(args.b):
         bdgen_bitstream(dirname)
