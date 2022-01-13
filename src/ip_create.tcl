@@ -52,6 +52,10 @@ set_property physical_name s_axis_ready [ipx::get_port_maps TREADY -of_objects [
 ipx::add_bus_parameter ASSOCIATED_BUSIF [ipx::get_bus_interfaces axi_clk -of_objects [ipx::current_core]] 
 ipx::add_bus_parameter FREQ_HZ [ipx::get_bus_interfaces axi_clk -of_objects [ipx::current_core]]
 
+#Setting Bus parameters
+set_property VALUE 100000000 [ipx::get_bus_parameters -of_objects [ipx::get_bus_interfaces -of_objects [ipx::current_core]  axi_clk] FREQ_HZ]
+set_property VALUE m_axis:s_axis [ipx::get_bus_parameters -of_objects [ipx::get_bus_interfaces -of_objects [ipx::current_core]  axi_clk] ASSOCIATED_BUSIF]
+
 # Package IP
 
 set_property core_revision 2 [ipx::current_core]
