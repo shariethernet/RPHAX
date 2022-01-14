@@ -20,10 +20,30 @@ If you are using [TL-Verilog](https://www.redwoodeda.com/tl-verilog) then [Sandp
 
 This will generate the folder `ip` where your design will be packaged as an AXI Stream IP with 1 master and 1 slave interface. The `myproj` folder will contain your block design. If you use `-b` flag then the bitstream will also be generated. However, for new designs, it is preferred to geenrate till blockdesign and proceed with the GUI for generating bitstream to catch any errors. 
 
+- To add your own custom design refer [templates](/templates) or create your own depending on the given example.
 
-### Adding AXI-S Clock Bus parameters 
+### Customizing Clock Bus parameters 
 
-*A suitable work around will be built into the script to avoid going back to GUI. Current approach would be to parse `component.xml` and add the interface parameters at the right spot. However, a TCL Level command would be simpler.*
+#### Using Vivado TCL 
+
+##### Changing the Clock Frequency
+
+- The script sets the default frequency to be `100 Mhz`. However this can be changed by placing the below TCL Command in [ip_create.tcl](src/ip_create.tcl)
+
+ ```
+set_property VALUE _your_clk_freq_in_Hz_ [ipx::get_bus_parameters -of_objects [ipx::get_bus_interfaces -of_objects [ipx::current_core]  axi_clk] FREQ_HZ]
+```
+##### Associating more ports with the same clock
+
+- The `ASSOCIATED_BUSIF` parameter is used to tell which AXI Buses use which clock in a multiple clock domain design. Here we use a single clock domain and so we associated all the AXI Buses to `axis_clk`. This can be done by adding the following command in [ip_create.tcl](src/ip_create.tcl)
+
+```
+set_property VALUE m_axis:s_axis [ipx::get_bus_parameters -of_objects [ipx::get_bus_interfaces -of_objects [ipx::current_core]  axi_clk] ASSOCIATED_BUSIF]
+```
+
+- Make sure that the different buses are separated by a colon `:`
+
+#### Using GUI
 
 - Open the VIVADO Project and from sources click on `component.xml` then right click `axi_clk` > `edit interface` > Parameters and then set the `ASSOCIATED_BUSIF`'s value to m_axis:s_axis
 - Similarly set `FREQ_HZ` to `100000000` (100Mhz) 
@@ -31,9 +51,16 @@ This will generate the folder `ip` where your design will be packaged as an AXI 
 - Open the block design project from `myproj` and Upgrade IP
 - Generate Bitstream
 
+### Repackaging
+
+- After making any changes in the IP. Repackage the IP. This is done automatically in the TCL Scripts
+- The block design has to be upgraded. This is also done automatically in the TCL Scripts
+- So every time you call `ip_create()` and `bd_create()` functions in python, the updates are checked and the latest design is used
+- Alternatively, this can also be done in GUI
+
 ## TO-DO
 
-- Add `TLV` templates for various interfaces (AXI4, AXI4 Lite, AXI Stream, RoCC etc.,)
+- Add `TLV` templates for various interfaces (AXI4, AXI4 Lite, RoCC etc.,)
 - Templates are found [here](./templates)
 - Provide `TLV` examples with the above interfaces and Pynq Overlays 
 - Re-structure RPHAX, as a python library to enable creation of custom interfaces
