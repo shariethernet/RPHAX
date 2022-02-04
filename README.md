@@ -22,6 +22,10 @@ This will generate the folder `ip` where your design will be packaged as an AXI 
 
 - To add your own custom design refer [templates](/templates) or create your own depending on the given example.
 
+## Overlays
+
+Refer [this](./inverter.ipynb) for the custom python overlay. This overlay is based on the inverter example. However, the flow remains the same for any other application with minor changes. (*Detailed overlay documentation is on the way*)
+
 ### Customizing Clock Bus parameters 
 
 #### Using Vivado TCL 
@@ -57,6 +61,7 @@ set_property VALUE m_axis:s_axis [ipx::get_bus_parameters -of_objects [ipx::get_
 - The block design has to be upgraded. This is also done automatically in the TCL Scripts
 - So every time you call `ip_create()` and `bd_create()` functions in python, the updates are checked and the latest design is used
 - Alternatively, this can also be done in GUI
+
 
 ## TO-DO
 
