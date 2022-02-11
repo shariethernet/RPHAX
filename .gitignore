@@ -1,6 +1,5 @@
 out/
 myproj/
-ip/
 *.v
 *.backup
 vivado.txt
