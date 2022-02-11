@@ -27,6 +27,7 @@ def tlv(filename):
     print("Compiling "+filename+" with Sandpiper-Saas")
     sp = "sandpiper-saas -i "+filename+" -o "+out_file+".v --iArgs --default_includes --outdir=out"
     try:
+        
         os.system(sp)
         print("Sandpiper has generated the verilog/systemverilog files")
         print("\n*******************************************************\n")
