@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Fri Feb 11 20:36:55 2022
+# Process ID: 14084
+# Current directory: D:/RISC-V/Pynq_Proj/Projects/Yun/yun_repo/PYNQ-adder/boards/Pynq-Z1/adds/adds/adds.runs/adds_rst_ps7_0_fclk0_0_synth_1
+# Command line: vivado.exe -log adds_rst_ps7_0_fclk0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source adds_rst_ps7_0_fclk0_0.tcl
+# Log file: D:/RISC-V/Pynq_Proj/Projects/Yun/yun_repo/PYNQ-adder/boards/Pynq-Z1/adds/adds/adds.runs/adds_rst_ps7_0_fclk0_0_synth_1/adds_rst_ps7_0_fclk0_0.vds
+# Journal file: D:/RISC-V/Pynq_Proj/Projects/Yun/yun_repo/PYNQ-adder/boards/Pynq-Z1/adds/adds/adds.runs/adds_rst_ps7_0_fclk0_0_synth_1\vivado.jou
+#-----------------------------------------------------------
+source adds_rst_ps7_0_fclk0_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP adds_rst_ps7_0_fclk0_0, cache-ID = da56856f582a29df.
+INFO: [Common 17-206] Exiting Vivado at Fri Feb 11 20:37:08 2022...

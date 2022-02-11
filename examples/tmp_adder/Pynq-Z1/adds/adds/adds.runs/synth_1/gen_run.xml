@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1644591861">
+  <File Type="PA-TCL" Name="adds_wrapper.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="adds_wrapper_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="adds_wrapper_reports.tcl"/>
+  <File Type="RDS-RDS" Name="adds_wrapper.vds"/>
+  <File Type="RDS-UTIL" Name="adds_wrapper_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="adds_wrapper_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="adds_wrapper.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="adds_wrapper_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="adds_wrapper_timing_summary_synth.pb"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/bd/adds/adds.bd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/adds/hdl/adds_wrapper.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="adds_wrapper"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="adds_axi_dma_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_xlconcat_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_axis_adder_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_rst_ps7_0_fclk3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_rst_ps7_0_fclk1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_xbar_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_ps7_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_rst_ps7_0_fclk2_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_rst_ps7_0_fclk0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_auto_pc_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_auto_pc_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_auto_us_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="adds_auto_us_1"/>
+</GenRun>
