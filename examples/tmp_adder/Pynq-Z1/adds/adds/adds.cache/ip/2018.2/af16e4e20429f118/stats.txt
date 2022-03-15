@@ -1,4 +1,0 @@
-NumberHits:0
-Timestamp: Fri Feb 11 15:09:04 UTC 2022
-VLNV: xilinx.com:ip:axi_dma:7.1
-SynthRuntime: 271
