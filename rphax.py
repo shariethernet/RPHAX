@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+import webbrowser as wb
 
 
 def intro():
@@ -42,6 +43,26 @@ def bsc():
 def test1(filename):
     print("Filename is ",filename)
     print("Extension checker=",filename[len(filename)-4:len(filename)])
+
+def var_share(var,fsuffix):
+    """ Function to share variables by writing into a file which can be later read by TCL or Shell script"""
+    print("\n Content to be written in tmp_"+fsuffix+".txt: ", var)
+    filename="tmp_"+fsuffix+".txt"
+    try:
+        rm_file="rm -rf "+filename
+        os.system(rm_file)
+    except:
+        pass
+
+    try:
+        f=open(filename,"a")
+        f.write(var+"\n")
+    except:
+        print("Couldnt create temporary file")
+    else:
+        print("\n Variable written in tmp_"+fsuffix+".txt: ", var)
+    finally:
+        f.close()
 
 def pwd_write(dirname):
     print("\n****************Setting Paths**********************\n")
@@ -126,22 +147,45 @@ def main():
 
     intro()
     parser = argparse.ArgumentParser(description = "RPHAX")
-    parser.add_argument("input_file", help = "Input .tlv file", type=str)
-    parser.add_argument('-b', action="store_true", help = "Generate upto Bitstream")
+
+    subparsers = parser.add_subparsers(help="commands")
+
+    generate_parser = subparsers.add_parser('generate',help="Generate mode: IP-> Block Design -> Bitstream")
+    
+    generate_parser.add_argument('-b', action="store_true", help = "Generate upto Bitstream")
+    generate_parser.add_argument('-connect',action="store_true",help = "Connect Local/Remote FPGA")
+    generate_parser.add_argument('-pynq',action="store_true",help = "Open PYNQ Jupyter Notebook")
+    generate_parser.add_argument('-url',type=str,help = "PYNQ URL Format = http://url:port",default="http://pynq:9090")
+    generate_parser.add_argument("input_file", help = "Input .tlv file", type=str)
+
+
+    #parser.add_argument()
+
+    connect_parser = subparsers.add_parser('connect',help="Connect mode: Connect (Local/Remote) Program &| probe designs on FPGA")
+    connect_parser.add_argument('bit_file',help="Bitstream Path",type=str)
+    connect_parser.add_argument('-ip',help="IP address of FPGA. Defaults to localhost",default="localhost",type=str)
+    connect_parser.add_argument('-p',help="Port number. Defaults to 3121", default=3121, type=int)
+    connect_parser.add_argument('-probe',help="Probe File Path",type=str)
+
+
+
+
     args = parser.parse_args()
 
     filename = args.input_file
     check_extension(filename)
     dirname = os.getcwd()
       
-    pwd_write(dirname)
+    var_share(dirname,"bd")
     
     
     tlv(filename)
     
     ipgen(dirname)
 
-    
+    if(args.pynq):
+        wb.open(args.url,new=2)
+
     
     if(args.b):
         bdgen_bitstream(dirname)

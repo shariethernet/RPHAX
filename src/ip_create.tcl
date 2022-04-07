@@ -1,4 +1,4 @@
-set fp [open "tmp.txt" r]
+set fp [open "tmp_bd.txt" r]
 set content [read $fp]
 close $fp
 set lines [split $content \n]
