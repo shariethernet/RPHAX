@@ -189,8 +189,8 @@ def main():
     
     if(args.b):
         bdgen_bitstream(dirname)
-    else:
-        bdgen(dirname)
+    #else:
+        #bdgen(dirname)
 
     #clean() 
 
