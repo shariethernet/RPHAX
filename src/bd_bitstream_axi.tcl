@@ -116,7 +116,7 @@ if { $nRet != 0 } {
    catch {common::send_gid_msg -ssname BD::TCL -id 2006 -severity "ERROR" $errMsg}
    return $nRet
 }
-set_property  ip_repo_paths  {./rphax_harness_ip} [current_project]
+set_property  ip_repo_paths  {./ip/rphax_harness_ip} [current_project]
 update_ip_catalog
 set bCheckIPsPassed 1
 ##################################################################
