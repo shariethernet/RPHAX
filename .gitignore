@@ -10,3 +10,7 @@ NA/
 tmp_*
 project_1_def_val.txt
 project_1_dump.txt
+harness_axi_ip
+harness_axi_proj
+ip
+*.str
