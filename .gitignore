@@ -1,6 +1,5 @@
 out/
 myproj/
-*.v
 *.backup
 vivado.txt
 *.jou
