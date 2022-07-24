@@ -6,7 +6,7 @@ set pwdd [lindex $lines 0]
 set output_dir "$pwdd/ip"
 puts $output_dir
 puts $pwdd
-create_project inv_p2 $output_dir/inv_ip2 -part xc7z020clg400-1
+create_project -f inv_p2 $output_dir/inv_ip2 -part xc7z020clg400-1
 #set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
 
 file mkdir $output_dir/inv_ip2/inv_ip2.srcs/sources_1/new
