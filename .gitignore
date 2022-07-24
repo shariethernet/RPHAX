@@ -13,3 +13,4 @@ harness_axi_ip
 harness_axi_proj
 ip
 *.str
+*.out
