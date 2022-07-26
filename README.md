@@ -16,9 +16,12 @@ If you are using [TL-Verilog](https://www.redwoodeda.com/tl-verilog) then [Sandp
 
 - Run the python script
 
-```python rphax.py Filename [-b]```
+```python rphax.py generate [-b] Filename ```
 
-This will generate the folder `ip` where your design will be packaged as an AXI Stream IP with 1 master and 1 slave interface. The `myproj` folder will contain your block design. If you use `-b` flag then the bitstream will also be generated. However, for new designs, it is preferred to geenrate till blockdesign and proceed with the GUI for generating bitstream to catch any errors. 
+On the first run, `runs` folder will be created. For every run a unique directory `run_projectname_hhmmss` will be created. All outputs will be present in this directory. 
+The `ip` directory contains the kernel packaged as an AXI Stream IP with 1 Master and 1 Slave ports
+The `run_bd` directory contains the generated Zynq based block design for the IP.
+When `-b` flag then the bitstream will also be generated. However, for new designs, it is preferred to genrate till blockdesign and proceed with the GUI for generating bitstream to catch any errors. 
 
 - To add your own custom design refer [templates](/templates) or create your own depending on the given example.
 
