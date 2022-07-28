@@ -13,3 +13,5 @@ harness_axi_ip
 harness_axi_proj
 *.str
 *.out
+src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v
+src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v
