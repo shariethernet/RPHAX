@@ -6,6 +6,7 @@ vivado.txt
 *.jou
 .vscode/
 *.log
+*.bak
 tmp_*
 project_1_def_val.txt
 project_1_dump.txt
