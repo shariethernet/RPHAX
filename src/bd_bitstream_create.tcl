@@ -1096,7 +1096,9 @@ add_files -norecurse "./run_bd/${project_name1}.srcs/sources_1/bd/design_1/hdl/d
 
 launch_runs impl_1 -to_step write_bitstream -jobs 10
 
-
+puts "Generating bitstream. It will take some time!"
+wait_on_run impl_1
+puts "Implementation done!"
 
 
 

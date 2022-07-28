@@ -92,8 +92,8 @@ def merge_files(files, out_file):
             # from next line
             outfile.write("\n")
 
-def automate_axi(rundir):
-        fname = "./runs/"+rundir+"/out/harness_axi.v"
+def automate_axi():
+        fname = "./tlv_out/harness_axi.v"
         with open(fname, "r") as f:
             ports = []
             for line in f:
@@ -146,18 +146,19 @@ def automate_axi(rundir):
             f_inst.close()
 
             merge_files(["wires.txt", "addr_dec.txt", "inst.txt"],
-                        "./src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v")
-            merge_files(["./src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part1.v", "./src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v"],
-                        "./src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v")
+                        "../../src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v")
+            merge_files(["../../src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part1.v", "../../src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v"],
+                        "../../src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v")
             os.system("rm wires.txt addr_dec.txt inst.txt")
 
 def ipgen(dirname, interface):
     print("\n**************Starting IP Packaging******************\n")
+    automate_axi()
     try:
         if(interface == "axi_s"):
             os.system("vivado -mode batch -source "+dirname+"/src/ip_create.tcl")
         elif(interface == "axi_l"):
-            automate_axi()
+            
             os.system("vivado -mode batch -source "+dirname+"/src/axi_lite/ip_create.tcl")
         else:
             print("Error: Invalid --interface argument. Available values are 'axi_s' and 'axi_l'")

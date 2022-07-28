@@ -444,7 +444,7 @@
 		.reset(S_AXI_ARESETN),
 		.a(slv_reg0),
 		.b(slv_reg1),
-		.c(c)
+		.c(c),
 	);
 
 endmodule

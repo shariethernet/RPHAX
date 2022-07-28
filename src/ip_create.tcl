@@ -25,12 +25,12 @@ create_project -f $project_name1 $output_dir/$project_name1 -part xc7z020clg400-
 file mkdir $output_dir/$project_name1/${project_name1}.srcs/sources_1/new
 #close [ open {/home/dhinesh/Files/RPHAX/src/inverter2.v} w ]
 #add_files -fileset sources_1 {/home/dhinesh/Files/RPHAX/src/inverter2.v}
-file copy -force ./tlv_out/inverter2.v $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/inverter2.v
-file copy -force ./tlv_out/inverter2_gen.v $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/inverter2_gen.v
+file copy -force ./tlv_out/${project_name1}.v $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/${project_name1}.v
+file copy -force ./tlv_out/${project_name1}_gen.v $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/${project_name1}_gen.v
 file copy -force ./tlv_out/includes/proj_verilog/sp_verilog.vh $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/sp_verilog.vh
 file copy -force ./tlv_out/includes/sandpiper.vh $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/sandpiper.vh
-file copy -force ./tlv_out/includes/sandpiper_gen.vh $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/sandpiper_gen.vh
-read_verilog $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/inverter2.v
+file copy -force ../../includes/sandpiper_gen.vh $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/sandpiper_gen.vh
+read_verilog $output_dir/${project_name1}/${project_name1}.srcs/sources_1/new/${project_name1}.v
 update_compile_order -fileset sources_1
 
 ############Packaging to AXI-Stream##################

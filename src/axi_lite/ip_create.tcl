@@ -1,14 +1,22 @@
-set output_dir "./"
+set fp [open "tmp_bd.txt" r]
+set content [read $fp]
+close $fp
+set lines [split $content \n]
+set pwdd [lindex $lines 0]
+set output_dir "$pwdd/ip"
+puts $output_dir
+puts $pwdd
+
 create_project -f harness_axi_ip $output_dir/harness_axi_ip -part xc7z020clg400-1
 
 file mkdir $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new
-file copy -force $output_dir/src/axi_lite/harness_axi_ip_v1_0.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0.v
-file copy -force $output_dir/src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0_S00_AXI.v
-file copy -force $output_dir/out/harness_axi.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi.v
-file copy -force $output_dir/out/harness_axi_gen.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_gen.v
-file copy -force $output_dir/includes/sp_verilog.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sp_verilog.vh
-file copy -force $output_dir/includes/sandpiper.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sandpiper.vh
-file copy -force $output_dir/includes/sandpiper_gen.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sandpiper_gen.vh
+file copy -force ../../src/axi_lite/harness_axi_ip_v1_0.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0.v
+file copy -force ../../src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0_S00_AXI.v
+file copy -force ./tlv_out/harness_axi.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi.v
+file copy -force ./tlv_out/harness_axi_gen.v $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_gen.v
+file copy -force ../../includes/sp_verilog.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sp_verilog.vh
+file copy -force ../../includes/sandpiper.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sandpiper.vh
+file copy -force ../../includes/sandpiper_gen.vh $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/sandpiper_gen.vh
 
 read_verilog $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0.v
 read_verilog $output_dir/harness_axi_ip/harness_axi_ip.srcs/sources_1/new/harness_axi_ip_v1_0_S00_AXI.v

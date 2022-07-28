@@ -1,4 +1,13 @@
-set output_dir "./ip"
+set fp [open "tmp_bd.txt" r]
+set content [read $fp]
+close $fp
+set lines [split $content \n]
+set pwdd [lindex $lines 0]
+set output_dir "$pwdd/ip"
+puts $output_dir
+puts $pwdd
+
+# set output_dir "./ip"
 create_project -f rphax_harness_ip $output_dir/rphax_harness_ip -part xc7z020clg400-1
 #set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
 #add_files -norecurse {/home/ee19b011/Files/RPHAX/rphax_harness_ip_v1_0.v /home/ee19b011/Files/RPHAX/rphax_harness_ip_v1_0_S00_AXI.v}
