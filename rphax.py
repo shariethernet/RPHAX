@@ -153,12 +153,12 @@ def automate_axi():
 
 def ipgen(dirname, interface):
     print("\n**************Starting IP Packaging******************\n")
-    automate_axi()
+    
     try:
         if(interface == "axi_s"):
             os.system("vivado -mode batch -source "+dirname+"/src/ip_create.tcl")
         elif(interface == "axi_l"):
-            
+            automate_axi()
             os.system("vivado -mode batch -source "+dirname+"/src/axi_lite/ip_create.tcl")
         else:
             print("Error: Invalid --interface argument. Available values are 'axi_s' and 'axi_l'")
@@ -233,9 +233,12 @@ def setup_runs(project_name):
     a=dt.datetime.now()
     b=str(a).split(" ")
     c=b[1].split(":")
-    d=c[0]+c[1]+c[2][0:2]
+    e=b[0].split("-")
+    f="".join(e)
+    d=f+"_"+c[0]+c[1]
     try:
-        run_dirname = "run_"+project_name+d
+        run_dirname = "run_"+project_name+"_"+d
+        print("Run Folder :",run_dirname)
         os.mkdir(run_dirname)
         os.chdir("../")
         print(os.getcwd())
