@@ -274,72 +274,83 @@ def main():
 
     intro()
     parser = argparse.ArgumentParser(description = "RPHAX")
-
-    subparsers = parser.add_subparsers(help="commands")
+    subparsers = parser.add_subparsers(dest = "mode",help="commands")
 
     generate_parser = subparsers.add_parser('generate',help="Generate mode: IP-> Block Design -> Bitstream")
-
-    generate_parser.add_argument('-b', action="store_true", help = "Generate upto Bitstream")
-    generate_parser.add_argument('-connect',action="store_true",help = "Connect Local/Remote FPGA")
-    generate_parser.add_argument('-pynq',action="store_true",help = "Open PYNQ Jupyter Notebook")
-    generate_parser.add_argument('-url',type=str,help = "PYNQ URL Format = http://url:port",default="http://pynq:9090")
+    generate_parser.add_argument('-b','--bitstream', action="store_true", help = "Generate upto Bitstream")
+    generate_parser.add_argument('-p','--connect',action="store_true",help = "Connect Local/Remote FPGA")
+    generate_parser.add_argument('-py','--pynq',action="store_true",help = "Open PYNQ Jupyter Notebook")
+    generate_parser.add_argument('-u','--url',type=str,help = "PYNQ URL Format = http://url:port", default="http://pynq:9090")
     generate_parser.add_argument("input_file", help = "Input .tlv file", type=str)
-    generate_parser.add_argument("--interface", help = "AXI Interface: axi_l for axi lite and axi_s for axi stream", type=str,default="axi_s")
-
+    generate_parser.add_argument('-if',"--interface", help = "AXI Interface: axi_l for axi lite and axi_s for axi stream", type=str,default="axi_s")
 
     #parser.add_argument()
-
     #Connect Mode
     connect_parser = subparsers.add_parser('connect',help="Connect mode: Connect (Local/Remote) Program &| probe designs on FPGA")
-
     connect_parser.add_argument('bit_file',help="Bitstream Path",type=str)
     connect_parser.add_argument('-ip',help="IP address of FPGA. Defaults to localhost",default="localhost",type=str)
     connect_parser.add_argument('-p',help="Port number. Defaults to 3121", default=3121, type=int)
     connect_parser.add_argument('-probe',help="Probe File Path",type=str)
 
-
-
     #makerchip create mode
     create_parser = subparsers.add_parser('makerchip',help="Develop RTL Design in Makerchip App")
-    create_parser.add_argument('input_mfile', help="Name of the .tlv file", type=str,nargs=1,default=None)
-    create_parser.add_argument('--from_url', help="Template URL", type=str)
+    create_parser.add_argument('design', help="Name of the .tlv file", type=str,nargs=1)
+    create_parser.add_argument('--from_url', help="Template URL", type=str,default=" ")
+    create_parser.add_argument('--server',help="Specify a different makerchip server", type=str,default="https://app.makerchip.com")
+    create_parser.add_argument('--makerchip_args',help="Add other makerchip arguments", type=str,default=" ")
 
     args = parser.parse_args()
 
-    filename = args.input_file
-    check_extension(filename)
-    rphax_dir_path = os.getcwd()
-    l_filename = filename.split(".")
-    project_name = l_filename[0]
-      
+    if(args.mode == "generate"):
+
+        filename = args.input_file
+        check_extension(filename)
+        rphax_dir_path = os.getcwd()
+        l_filename = filename.split(".")
+        project_name = l_filename[0]
+        rundir = setup_runs(project_name)
+        run_dir_path = "runs/"+rundir
+        run_dir_abs_path = rphax_dir_path+"/runs/"+rundir
 
     
-    rundir = setup_runs(project_name)
-    run_dir_path = "runs/"+rundir
-    run_dir_abs_path = rphax_dir_path+"/runs/"+rundir
+        tlv(filename,rundir)
 
-  
-    tlv(filename,rundir)
-    
-    os.chdir(run_dir_path)
-    var_share(run_dir_abs_path,"bd")
+        os.chdir(run_dir_path)
+        var_share(run_dir_abs_path,"bd")
 
-    var_share(project_name,"projectname")
-    
-    
-    
-    ipgen(rphax_dir_path, args.interface)
+        var_share(project_name,"projectname")
 
-    if(args.pynq):
-        wb.open(args.url,new=2)
 
+
+        ipgen(rphax_dir_path, args.interface)
+
+        if(args.pynq):
+            wb.open(args.url,new=2)
+
+
+        if(args.b):
+            bdgen_bitstream(rphax_dir_path, args.interface)
+        else:
+            bdgen(rphax_dir_path, args.interface)
+
+        #clean() 
+    if(args.mode == "makerchip"):
+        print("Opening design in Makerchip to edit...")
+        if(args.from_url != " " and args.server !="https://app.makerchip.com" and args.makerchip_args != " "):
+            command = "makerchip --from_url "+args.from_url+" --server "+args.server+" "+args.makerchip_args+" "+args.design[0]
+        elif(args.from_url != " " and args.server !="https://app.makerchip.com"):
+            command = "makerchip --from_url "+args.from_url+" --server "+args.server+" "+args.design[0]
+        elif(args.from_url != " "):
+            command = "makerchip --from_url "+args.from_url+" "+args.design[0]
+        elif(args.server !="https://app.makerchip.com"):
+            command = "makerchip --server "+args.server+" "+args.design[0]
+        else:
+            command = "makerchip "+args.design[0]
+        print(command)
+        os.system(command)
     
-    if(args.b):
-        bdgen_bitstream(rphax_dir_path, args.interface)
-    else:
-        bdgen(rphax_dir_path, args.interface)
-
-    #clean() 
+    if(args.mode == "connect"):
+        pass
 
 if __name__ == '__main__':
     main()
