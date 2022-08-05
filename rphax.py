@@ -270,10 +270,27 @@ def check_extension(filename):
         print("Only .tlv files are supported")
         exit()
 
+def output_files(project_name,rundir):
+    hwh_file_path = "./run_bd/"+project_name+".srcs/sources_1/bd/design_1/hw_handoff/design_1.hwh"
+    tcl_file_path = "./run_bd/"+project_name+".srcs/sources_1/bd/design_1/hw_handoff/design_1_bd.tcl"
+    bit_file_path = "./run_bd/"+project_name+".runs/impl_1/design_1_wrapper.bit"
+    try:
+        os.system("mkdir pynq_out")
+        print(hwh_file_path)
+        print(tcl_file_path)
+        print(bit_file_path)
+        os.system("cp -f {hwh_file_path} pynq_out/")
+        os.system("cp -f {tcl_file_path} pynq_out/")
+    except:
+        print("Error copying output files")
+
+
 def main():
 
     intro()
     parser = argparse.ArgumentParser(description = "RPHAX")
+    parser.add_argument("--clean",action="store_true",help="Clean all previous runs")
+
     subparsers = parser.add_subparsers(dest = "mode",help="commands")
 
     generate_parser = subparsers.add_parser('generate',help="Generate mode: IP-> Block Design -> Bitstream")
@@ -328,12 +345,14 @@ def main():
             wb.open(args.url,new=2)
 
 
-        if(args.b):
+        if(args.bitstream):
             bdgen_bitstream(rphax_dir_path, args.interface)
         else:
             bdgen(rphax_dir_path, args.interface)
 
+        output_files(project_name,rundir)
         #clean() 
+
     if(args.mode == "makerchip"):
         print("Opening design in Makerchip to edit...")
         if(args.from_url != " " and args.server !="https://app.makerchip.com" and args.makerchip_args != " "):
@@ -351,6 +370,19 @@ def main():
     
     if(args.mode == "connect"):
         pass
+
+    if(args.clean):
+        try:
+            if(sys.platform == "Windows"):
+                os.system("rmdir /f buns")
+            elif(sys.platform in ["Linux","Darwin"]):
+                os.system('rm -rf buns')
+            else:
+                raise Exception
+        except:
+            print("Error Cleaning Files")
+        else:
+            print("Succesfully cleaned the files")
 
 if __name__ == '__main__':
     main()
