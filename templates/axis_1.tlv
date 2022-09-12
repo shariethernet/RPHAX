@@ -20,14 +20,14 @@ module inverter#(parameter DATA_WIDTH = 32)(
    //inputs
    //$axi_clk = *axi_clk;
    $axi_reset_n = *axi_reset_n;
-   $s_axis_valid = *s_axis_valid;
-   $s_axis_data[DATA_WIDTH:0] = *s_axis_data; //parametize
-   $m_axis_ready = *m_axis_ready;
+   $ss_axis_valid = *s_axis_valid;
+   $ss_axis_data[DATA_WIDTH:0] = *s_axis_data; //parametize
+   $mm_axis_ready = *m_axis_ready;
    
 
 
 
-   $s_axis_ready = $m_axis_ready; //When the my slave is ready to accept data I am ready to accept
+   $ss_axis_ready = $mm_axis_ready; //When the my slave is ready to accept data I am ready to accept
    
 
    //--------- USER LOGIC SPACE BEGIN --------------  
@@ -39,12 +39,12 @@ module inverter#(parameter DATA_WIDTH = 32)(
 
    \SV_plus
       always_ff @(posedge *clk) begin
-         m_axis_valid <= s_axis_valid & s_axis_ready;
+         $mm_axis_valid <= $ss_axis_valid & $ss_axis_ready;
       end
 
    //outputs
-   *s_axis_ready = $s_axis_ready;
-   *m_axis_valid = $m_axis_valid;
-   *m_axis_data = $m_axis_data;
+   *s_axis_ready = $ss_axis_ready;
+   *m_axis_valid = $mm_axis_valid;
+   *m_axis_data = $mm_axis_data;
 \SV
    endmodule
