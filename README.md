@@ -1,9 +1,14 @@
 # 1st CLaaS on PYNQ
 1st CLaaS on PYNQ, brings the use model of [1st CLaaS](https://github.com/os-fpga/1st-CLaaS), a framework for accelerating workloads with FPGAs on Cloud, by streaming data through web-protocols to [PYNQ](https://pynq.readthedocs.io/en/latest/) FPGAs, but with the capabilities of RPAHX (Rapid Prototyping of Hardware Accelerators on Xilinx FPGAs), an automation framework to quickly prototype a hardware accelerator and integrate on a Zynq/Microblaze based design on Xilinx FPGAs.
 The framework also has automated scripts to setup and securely expose your local FPGA to the internet, through Cloudflare Zero Trust on your own domain!  
+
 # RPHAX - Rapid Prototyping of Hardware Accelerators on Xilinx FPGAs 
 
 RPHAX provides a quick automation flow to develop and prototype hardware accelerators on Xilinx FPGAs.  The user can develop the Hardware Accelerator in TL-Verilog/Verilog/System Verilog and use this flow to automatically package into an IP(AXI4, AXI4Lite, AXI Stream), create a Zynq based block design, top level wrappers and generate the bitstream.
+
+<p>
+<img src="/docs/img/1stclaasonpynq.jpeg"/>
+</p>
 
 ## Requirements
 
@@ -53,7 +58,29 @@ _Support to be added to automatically upload Hardware Handoff and Bitstream to P
 
 ### Connect Mode
 
+``` python rphax.py connect ```
+
+- The connect mode has been provided as an external [script](./rphax_connect_test/rphaxFPGAConnect.py)
+- The connect framework automates [cloudflared](https://github.com/cloudflare/cloudflared) on your PYNQ FPGA, running Linux. 
+- Uses Cloudflare API, to setup allocate and deallocate CNAME Records on your Domain's DNS.
+- Requires Cloudflare Account, Domain and a Token
+- The default domain name is `u.<no_of_fpga>_pynq.<your_domain>.com`. This can be edited
+- DO NOT use this script on any domain in use, unless you know what you are doing
+
 ### Makerchip Mode
+
+Syntax
+
+```rphax.py makerchip [--makerchip_args MAKERCHIP_ARGS] design```
+
+A wrapper that opens your local design in Makerchip-app. You can append makerchip arguments to the command. See Makerchip-app for more details
+ 
+
+#### Flags
+- Use `--from_url` to open a .tlv project specified by the URL
+- Use `--server` to specify a specific makerchip server. Defaults to `app.makerchip.com` 
+- Use `--maherchip_args` to append arguments to makerchip app
+
 
 ## Overlays
 
