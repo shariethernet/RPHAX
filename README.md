@@ -124,7 +124,8 @@ Refer [examples](./examples_wrapped) for the custom python overlay. Several TL-V
 ### Video Walkthrough
 
 Click on the below to view the video
-[![Video](https://img.youtube.com/vi/Q5B5X7CFILY/0.jpg)](https://www.youtube.com/watch?v=Q5B5X7CFILY "Everything Is AWESOME")
+
+[![Video](https://img.youtube.com/vi/Q5B5X7CFILY/0.jpg)](https://www.youtube.com/watch?v=Q5B5X7CFILY "Video Demo")
 ## Customizing Clock Bus parameters [OPTIONAL]
 
 All the Clock Bus prameters are pre-configured and these sub-section(s) are optional
