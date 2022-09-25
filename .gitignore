@@ -16,3 +16,5 @@ harness_axi_proj
 *.out
 src/axi_lite/harness_axi_ip_v1_0_S00_AXI_part2.v
 src/axi_lite/harness_axi_ip_v1_0_S00_AXI.v
+docs/*.jpeg
+docs/*.png
