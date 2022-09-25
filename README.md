@@ -68,15 +68,12 @@ set_property VALUE m_axis:s_axis [ipx::get_bus_parameters -of_objects [ipx::get_
 
 ## TO-DO
 
-- Add `TLV` templates for various interfaces (AXI4, AXI4 Lite, RoCC etc.,)
-- Templates are found [here](./templates)
-- Provide `TLV` examples with the above interfaces and Pynq Overlays 
 - Re-structure RPHAX, as a python library to enable creation of custom interfaces
 
 ## Note
 
 - This project is Work In Progress
-- Currently there is support for single master - single slave AXI Streaming interfaces 
+- Currently there is support for single master - single slave AXI Streaming interfaces, AXI-4 Lite Interface
 - The hardware accelerator must have the ports named as given in the template
 - In `TL-Verilog` map the pipesignals to the ports 
 
