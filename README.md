@@ -6,9 +6,7 @@ The framework also has automated scripts to setup and securely expose your local
 
 RPHAX provides a quick automation flow to develop and prototype hardware accelerators on Xilinx FPGAs.  The user can develop the Hardware Accelerator in TL-Verilog/Verilog/System Verilog and use this flow to automatically package into an IP(AXI4, AXI4Lite, AXI Stream), create a Zynq based block design, top level wrappers and generate the bitstream.
 
-<p>
-<img src="/docs/img/1stclaasonpynq.jpeg"/>
-</p>
+![](docs/1stclassonpynq.jpeg)
 
 ## Requirements
 
@@ -56,6 +54,30 @@ RPHAX provides a quick automation flow to develop and prototype hardware acceler
 
 _Support to be added to automatically upload Hardware Handoff and Bitstream to PYNQ Board_
 
+#### Working 
+
+- Generate RTL (Verilog/System Verilog) from TL-Verilog 
+
+![](docs/tlvtortl.png)
+
+- Packaging RTL to IP based on the interface template
+
+![](docs/rtltoip.png)
+
+- Generating Zynq based block design 
+
+![](docs/iptoblkdesign.png)
+
+- Generating Top Level wrapper and Bitstream
+
+![](docs/blockdesigntobitstream.png)
+
+Rename the bitstream and hardware handoff to the same name and upload to the jupyter notebook. Write Python overlay based on the template to accelerate specific functions.
+
+To know more stay tuned for the training on **PYNQ based FPGA Design**.
+
+Refer examples and [PYNQ-Overlay Documentation](https://pynq.readthedocs.io/en/latest/overlay_design_methodology.html), to learn about developing overlays
+
 ### Connect Mode
 
 ``` python rphax.py connect ```
@@ -66,6 +88,9 @@ _Support to be added to automatically upload Hardware Handoff and Bitstream to P
 - Requires Cloudflare Account, Domain and a Token
 - The default domain name is `u.<no_of_fpga>_pynq.<your_domain>.com`. This can be edited
 - DO NOT use this script on any domain in use, unless you know what you are doing
+
+### Manual setup
+- Read [this](./docs/CloudflareSetuponPYNQManual.pdf) pdf which provides a step by step guide on cloudflared setup on PYNQ
 
 ### Makerchip Mode
 
@@ -96,8 +121,10 @@ Refer [examples](./examples_wrapped) for the custom python overlay. Several TL-V
 - [Image Inversion](./examples/inverter/)
 - [Vector Add](./examples/vadd/)
 
+### Video Walkthrough
 
-
+Click on the below to view the video
+[![Video](https://img.youtube.com/vi/Q5B5X7CFILY/0.jpg)](https://www.youtube.com/watch?v=Q5B5X7CFILY "Everything Is AWESOME")
 ## Customizing Clock Bus parameters [OPTIONAL]
 
 All the Clock Bus prameters are pre-configured and these sub-section(s) are optional
