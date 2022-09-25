@@ -22,6 +22,7 @@ RPHAX provides a quick automation flow to develop and prototype hardware acceler
     - ```pip install makerchip-app```
     
 ## Getting Started 
+- Check out my [Medium blog](https://medium.com/@shariethernet/simplifying-full-stack-fpga-development-right-from-rtl-to-software-1st-claas-on-pynq-part-1-dec210785f4a) to get a overview of the framework [RECOMMENDED]
 
 - Clone the repo 
 
@@ -195,6 +196,11 @@ This project was supported by [**Google Summer of Code 2022**](https://summerofc
 
 </p>
 
+## References
+
+- [1st CLaaS](https://github.com/os-fpga/1st-CLaaS)
+- [PYNQ Documentation](https://pynq.readthedocs.io/en/latest/)
+- [TL-Verilog](makerchip.com)
 
 ## Acknowledgements
 
