@@ -214,6 +214,12 @@ This project was supported by [**Google Summer of Code 2022**](https://summerofc
 
 - [Shrihari Gokualchandran](https://www.linkedin.com/in/shariethernet/), PhD student at University of Texas at Austin
 
+## Contributing
+
+Contributions are what make the open source community such an amazing vehicle to learn, inspire, and create. Any contributions you make are **greatly appreciated**. Kudos for filing bugs. Deepest thanks for fixing them and for contributing new features.
+
+If you are interested in getting involved in this project, connect with [me](https://www.linkedin.com/in/shariethernet/) or [Steve](https://github.com/stevehoover). 
+
 ## Licensing
 Distributed under MIT License. See [LICENSE](LICENSE)
 
