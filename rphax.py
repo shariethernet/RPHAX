@@ -295,7 +295,7 @@ def main():
 
     generate_parser = subparsers.add_parser('generate',help="Generate mode: IP-> Block Design -> Bitstream")
     generate_parser.add_argument('-b','--bitstream', action="store_true", help = "Generate upto Bitstream")
-    generate_parser.add_argument('-p','--connect',action="store_true",help = "Connect Local/Remote FPGA")
+    generate_parser.add_argument('-c','--connect',action="store_true",help = "Connect Local/Remote FPGA")
     generate_parser.add_argument('-py','--pynq',action="store_true",help = "Open PYNQ Jupyter Notebook")
     generate_parser.add_argument('-u','--url',type=str,help = "PYNQ URL Format = http://url:port", default="http://pynq:9090")
     generate_parser.add_argument("input_file", help = "Input .tlv file", type=str)
