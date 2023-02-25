@@ -7,6 +7,7 @@ vivado.txt
 .vscode/
 *.log
 *.bak
+rphax_connect/connectionparams.py
 tmp_*
 project_1_def_val.txt
 project_1_dump.txt

@@ -93,7 +93,7 @@ def merge_files(files, out_file):
             outfile.write("\n")
 
 def automate_axi():
-        fname = "./tlv_out/harness_axi.v"
+        fname = "harness_axi.v"
         with open(fname, "r") as f:
             ports = []
             for line in f:
