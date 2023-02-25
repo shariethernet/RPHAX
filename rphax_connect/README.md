@@ -17,7 +17,10 @@ RPHAX connect is a quick way to expose your FPGA to the internet for Public/Clas
 - Xilinx Zynq FPGA running Pynq v2.5 and above (may work on older version)
 
 ## Running rphax connect
-Run the following commands from the PYNQ Terminal
+After cloning the repo or copying this sub-directory to pynq, Run the following commands from the PYNQ Terminal
+- Rename `connectionparams_template.py`
+    - `mv connectionparams_template.py connectionparams.py`
+- Enter your Cloudflare `API_KEY` and `DOMAIN` in `connectionparams.py`
 - `pip install -r requirements.txt`
 - `cd rphax_connect`
 - `python rphaxFPGAConnect.py -cn <Optional: sub-domain name for your board\> <your pynq hostname eg: 192.168.0.121:9090 or pynq1:9090 etc.,>
